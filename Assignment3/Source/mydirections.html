@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="" data-ng-app="GoogleDirection">
+<head>
+  <meta t="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angular Demo</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js" type="application/javascript"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+    
+  <link rel="stylesheet" href="css/main.css">  
+    
+    <style>
+     #map-canvas {
+    width: 650px;
+    height: 450px;
+}
+      .weatherModule {
+    background:#f2f2f2;
+    height:150px;
+    width:250px;
+    border: 1px dashed #ccc;
+    padding: 1em;
+}
+  .weatherModule1 {
+    background:#f2f2f2;
+    height:150px;
+    width:250px;
+    border: 1px dashed #ccc;
+    padding: 1em;
+}
+
+
+
+.currentConditions {
+    float: left;
+}
+ .currentConditions1 {
+    float: left;
+}
+
+
+.currentIcon {
+    float: left;
+    margin: 0 .75em;
+}
+.currentIcon1 {
+    float: left;
+    margin: 0 .75em;
+}
+
+    </style>
+</head>
+
+<body>
+<h1>Find your Directions and Weather</h1>
+<div class="wrapp" ng-controller="googlemapoutput">
+         <div class="row">
+		
+             <label> SOURCE:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <input type="text" ng-model="startlocation" id="startlocation"/>&nbsp;&nbsp;&nbsp;&nbsp;
+             <br>
+             <br>
+			 
+             <label>DESTINATION:</label>&nbsp;
+             <input type="text"  ng-model="endlocation" id="endlocation" /> 
+             <br><br>
+                <button style="color: #FFFFFF; font-family: Verdana; font-weight: bold; font-size: 16px; background-color: #72A4D2;" id="btn" ng-click="calcRoute();getWeather();">
+                    Get Direction
+                </button>
+                 <br/></br>
+
+            </div>
+            <div id="map-canvas" style="height: 400px;"></div>
+			<table>
+				<tr>
+				<td>
+				<div class="weatherModule" style="display:none;">
+<p class="currentConditions">SOURCE:Current Temperature: {{temp}} &deg F <br/> weather condition: {{weather}}</p>
+<div class="currentIcon"><img src="{{icon}} "/></div>
+</div>
+				</td>
+				<td>
+				 <div class="weatherModule1" style="display:none;">
+					<p class="currentConditions1">DESTINATION:Current Temperature: {{temp1}} &deg F <br/> weather condition: {{weather1}}</p>
+					<div class="currentIcon1"><img src="{{icon1}}" /></div>
+					</div>
+				</td>
+				</tr>
+			</table>
+        </div>
+    </body>
+</html>
+
+
+<script>
+angular.module('GoogleDirection', [])
+.controller('googlemapoutput', function ($scope,$http) {
+
+    var map;
+    var mapOptions;
+    var directionsDisplay = new google.maps.DirectionsRenderer({
+        draggable: true
+    });
+    var directionsService = new google.maps.DirectionsService();
+    $scope.initialize = function () {
+          var pos = new google.maps.LatLng(0, 0); 
+          var mapOptions = {
+                zoom: 3,
+                center: pos
+            };
+
+            map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+     };
+    $scope.calcRoute = function () {
+       var end = document.getElementById('endlocation').value;
+            var start = document.getElementById('startlocation').value;
+            if(start.length==0){
+            //document.getElementById('startlocation').value='Kansas City'
+            }
+        
+            var url1 = 'http://api.openweathermap.org/data/2.5/weather?q='+start;
+            var url2 = 'http://api.openweathermap.org/data/2.5/weather?q='+end;
+            var t1,t2,t3,t4;
+
+             $http.get(url1).
+                success(function(data) {
+                 t1=data.main.temp;
+             // t = (9/5)((t1- 273) + 32);
+                 //alert(t3);
+                   t2= data.weather[0].description;
+                      t3= data.weather[0].icon;
+                 document.querySelector(".weatherModule").style.display = 'block';
+                 $scope.temp = t1;
+             // $scope.icon = data.weather[0].icon;
+                $scope.weather = t2; 
+                 // $scope.currentweather = {html:"Currently " +t1 +" &deg; F and " + t2 + ""}
+                
+                });
+            $http.get(url2).
+                success(function(data) {
+                   
+                 t3=data.main.temp;
+                   t4= data.weather[0].description;
+                
+                 document.querySelector(".weatherModule1").style.display = 'block';
+                $scope.temp1 = t3;
+              // $scope.icon = data.current_observation.icon_url;
+                $scope.weather1 = t4; 
+                });
+        
+            var request = {
+                origin: start,
+                destination: end,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+
+            directionsService.route(request, function (response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setMap(map);
+                    directionsDisplay.setDirections(response);
+                    console.log(status);
+                }
+           
+        });
+    };
+ 
+    $scope.getMyPos = function () {
+        
+         navigator.geolocation.getCurrentPosition(function (position) {
+
+            var pos = new google.maps.LatLng(
+            position.coords.latitude,
+            position.coords.longitude);
+
+            var mapOptions = {
+                zoom: 16,
+                center: pos
+            };
+
+            map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+
+            var marker = new google.maps.Marker({
+                position: pos,
+                map: map
+            });
+        });
+        
+        
+     };
+    
+        
+
+    google.maps.event.addDomListener(window, 'load', $scope.initialize);
+
+});         
+                
+
+</script>
