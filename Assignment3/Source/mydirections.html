@@ -53,7 +53,7 @@
 </head>
 
 <body>
-<h1>Find your Directions and Weather</h1>
+<h1 id="heading">Find your Directions and Weather</h1>
 <div class="wrapp" ng-controller="googlemapoutput">
          <div class="row">
 		
@@ -104,6 +104,12 @@ angular.module('GoogleDirection', [])
     });
     var directionsService = new google.maps.DirectionsService();
     $scope.initialize = function () {
+	var ser = window.location.search;
+	String(ser);
+	var fields = String(ser).split("&");
+	var data = String(fields[0]).split("=");
+	alert("Welcome to Get Direction:  "+data[1]);
+	document.getElementById("heading").innerHTML = "Find your Directions and Weather: "+data[1];
           var pos = new google.maps.LatLng(0, 0); 
           var mapOptions = {
                 zoom: 3,

@@ -63,10 +63,10 @@ body {
              <h1>Login</h1> 
             <form name="f1" method="get" action="mydirections.html">
                 <p>
-                    <input type="text" name="login" value="" placeholder="Username or Email">
+                    <input type="text" id="un" name="login" value="" placeholder="Username or Email">
                 </p>
                 <p>
-                    <input type="password" name="password" value="" placeholder="Password">
+                    <input type="password" id="pwd" name="password" value="" placeholder="Password">
                 </p>
                 <p>
                   <button id="button" name="redirect" value="login" style="color: #FFFFFF; font-family: Verdana; font-weight: bold; font-size: 16px; background-color: #72A4D2;" onClick="redirect1()">Login
@@ -74,6 +74,11 @@ body {
     <script type="text/javascript">
     function redirect1()
     {
+	 var Username= document.getElementById("un");
+	alert("You are logged in as :"+Username.value);
+	var un= document.getElementById("un");
+	 window.localStorage.setItem("username" , un.value);
+	 
     var url = "mydirections.html";
     window.location(url);
     }
