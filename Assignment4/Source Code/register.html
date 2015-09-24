@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta t="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  font: 30px/40px 'Chiller', Tahoma, Verdana, sans-serif;
+  color: #72A4D2;
+  background: #99ff99;
+}
+
+.container {
+  margin: 80px auto;
+  width: 640px;
+}
+
+.Signup {
+  position: relative;
+  margin: 0 auto;
+  padding: 20px 20px 20px;
+  width: 400px;
+  background: white;
+  border-radius: 3px;
+  @include box-shadow(0 0 200px rgba(white, .5), 0 1px 2px rgba(black, .3));
+}
+   #button {
+  padding: 0 18px;
+  height: 29px;
+ font: 25px/35px 'Chiller', Tahoma, Verdana, sans-serif;
+  color: #330066;
+  font-weight: bold;
+   }
+
+</style>
+</head>
+<body>
+    
+    
+  <section class="container">
+      
+
+    <div class="Signup">
+
+      <h1>Sign up</h1> 
+         <p>Join Us to Get your Directions and Weather Conditions...!!!</p>
+      <form method="get" action="login.html">
+        <p><input type="text" id="emailid" name="emailid" value="" placeholder="Enter your Email id"></p>
+        <p><input type="number" id="mobile" name="mobile" value="" placeholder="Enter your mobile number"></p>
+             <p><input type="text" id="username" name="username" value="" placeholder="Set your username"></p>
+                  <p><input type="password" id="password" name="password" value="" placeholder="Set your password"></p>
+       
+        <p> <button id="button" name="redirect" value= "sign up" onClick="redirect2()">Register
+
+    <script type="text/javascript">
+    function redirect2()
+    {
+	var emailid= document.getElementById("emailid");
+	var mobile= document.getElementById("mobile");
+	var username= document.getElementById("username");
+	var password= document.getElementById("password");
+	 localStorage.setItem("emailid" , emailid.value);
+	  localStorage.setItem("mobile" , mobile.value);
+	   localStorage.setItem("username" , username.value);
+	    localStorage.setItem("password" , password.value);
+	alert("You are registered in as :"+localStorage.getItem("username"));
+    var url = "login.html";
+    window.location(url);
+    }
+            </script></button></p>
+      </form>
+    </div>
+            </section>
+
+</body>
+</html>
+
+
+
+
+

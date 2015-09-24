@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta t="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    font: 30px/40px'Chiller', Tahoma, Verdana, sans-serif;
+    color: #72A4D2;
+    background: #99ff99;
+}
+.container {
+    margin: 80px auto;
+    width: 640px;
+    
+}
+.login {
+    position: relative;
+    margin: 0 auto;
+    padding: 20px 20px 20px;
+    width: 400px;
+   
+    background: white;
+    border-radius: 3px;
+    @include box-shadow(0 0 200px rgba(white, .5), 0 1px 2px rgba(black, .3));
+}
+#button {
+    padding: 0 18px;
+    height: 29px;
+    font: 25px/35px'Chiller', Tahoma, Verdana, sans-serif;
+    color: #330066;
+    font-weight: bold;
+}
+    #button1 {
+    padding: 0 18px;
+    height: 29px;
+    font: 25px/35px'Chiller', Tahoma, Verdana, sans-serif;
+    color: #330066;
+    font-weight: bold;
+}
+#recovery {
+    color: red;
+}
+#about {
+    color: #330066;
+}
+#contact {
+    color: #330066;
+}
+#signup {
+    color: green;
+}
+</style>
+</head>
+<body>
+    
+
+    <section class="container">
+        <div class="login">
+             
+           
+             <h1>Login</h1> 
+            <form name="f1" method="get" action="mydirections.html">
+                <p>
+                    <input type="text" id="un" name="login" value="" placeholder="Username or Email">
+                </p>
+                <p>
+                    <input type="password" id="pwd" name="password" value="" placeholder="Password">
+                </p>
+                <p>
+                  <button id="button" name="redirect" value="login" style="color: #FFFFFF; font-family: Verdana; font-weight: bold; font-size: 16px; background-color: #72A4D2;" onClick="redirect1()">Login
+
+    <script type="text/javascript">
+    function redirect1()
+    {
+	 var Username= document.getElementById("un");
+	alert("You are logged in as :"+Username.value);
+	var un= document.getElementById("un");
+	 window.localStorage.setItem("username" , un.value);
+	 
+    var url = "mydirections.html";
+    window.location(url);
+    }
+                      </script></button></p>
+                <p>
+        
+            <button id="button1" style="color: #FFFFFF; font-family: Verdana; font-weight: bold; font-size: 16px; background-color: #72A4D2;" value='register' onclick="f1.action='register.html'; return true;"> Register
+
+   </p>
+
+
+
+                </p>
+                
+    </div>
+            </form>
+        </div>
+    </section>
+   
+</body></html>

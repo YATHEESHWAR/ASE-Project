@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="" data-ng-app="GoogleDirection">
+<head>
+  <meta t="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angular Demo</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js" type="application/javascript"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+    
+  <link rel="stylesheet" href="css/main.css">  
+    
+    <style>
+     #map-canvas {
+    width: 650px;
+    height: 450px;
+}
+      .weatherModule {
+    background:#f2f2f2;
+    height:150px;
+    width:250px;
+    border: 1px dashed #ccc;
+    padding: 1em;
+}
+  .weatherModule1 {
+    background:#f2f2f2;
+    height:150px;
+    width:250px;
+    border: 1px dashed #ccc;
+    padding: 1em;
+}
+
+
+
+.currentConditions {
+    float: left;
+}
+.weatherModule {
+    padding: 1em;
+}
+
+.currentIcon {
+    float: left;
+    margin: 0 .75em;
+}
+
+    </style>
+</head>
+
+<body>
+<h1 id="heading" style="color:blue">Welcome To Yahoo Finance</h1>
+<div class="wrapp" ng-controller="googlemapoutput">
+		<div>
+		<button id="homeBtn" ng-click="goToHomePage" style="color: #FFFFFF; font-family: Verdana; font-weight: bold; font-size: 16px; background-color: #72A4D2;">
+                    Home
+                </button>
+		</div>
+		<div>&nbsp;&nbsp;</div>
+         <div class="row">
+		 <div id="header" width="100%" >
+					<embed src="sample.html" style="padding-left:-300px;" height="50px" />
+      <!-- Content will be inserted by jQuery from header.html -->
+    </div>
+		 <label style=""> Company Name:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <input type="text" ng-model="cmpnay" id="cmpnay"/>
+             <br><br>
+                <button id="btn" ng-click="calcRoute()">
+                    Get Finance Chart
+                </button>
+                 <br/></br>
+				<p> Finance chart </p>
+    <img src="{{icon}}" height="500" width="800">
+            </div>			
+        </div>
+    </body>
+</html>
+
+
+<script>
+angular.module('GoogleDirection', [])
+.controller('googlemapoutput', function ($scope,$http) {
+    $scope.initialize = function () {
+          var ser = window.location.search;
+	String(ser);
+	var fields = String(ser).split("&");
+	var data = String(fields[0]).split("=");
+	alert("Welcome to Get Direction:  "+data[1]);
+	document.getElementById("heading").innerHTML = "Welcome To Yahoo Finance: "+data[1];
+	var cmpny= document.getElementById("cmpnay");
+	$scope.icon = 'http://chart.finance.yahoo.com/z?s=GOOG&t=12m&q=l&z=l&p=m50,m200';	  
+     };
+    $scope.calcRoute = function () {
+	var cmpny= document.getElementById("cmpnay");
+	$scope.icon = 'http://chart.finance.yahoo.com/z?s='+cmpny.value+'&t=12m&q=l&z=l&p=m50,m200';
+       $.get("sample.html", function(data) {
+    $("#header").html(data);
+  });
+    };
+		$scope.goToHomePage = function() {
+		
+		}
+ 
+    
+        
+
+    google.maps.event.addDomListener(window, 'load', $scope.initialize);
+
+});         
+                
+
+</script>
