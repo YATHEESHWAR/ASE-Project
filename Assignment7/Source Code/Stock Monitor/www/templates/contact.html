@@ -1,0 +1,38 @@
+<ion-view view-title="Contact Us">
+  <ion-content>
+  <div class="list">
+	<label class="item item-input">
+	  <span class="input-label">Name</span>
+	  <input id="name" type="text" ng-model="user.name">
+	</label>
+	<label class="item item-input">
+	  <span class="input-label">Email</span>
+	  <input id="email" type="email" ng-model="user.email">
+	</label>
+	<label class="item item-input item-select">
+    <div class="input-label">
+      Purpose
+    </div>
+    <select id="purpose">
+      <option value="New Club Registration">Complaint</option>
+      <option value="Report a Problem">Report a Problem</option>
+      <option value="Feedback">Feedback</option>
+      <option value="Other">Other</option>
+    </select>
+  </label>
+  <label class="item item-input">
+  <span class="input-label">Message</span>
+    <textarea id="message" placeholder="Message"></textarea>
+  </label>
+  </div>
+  <div class="padding">
+	<button class="button button-block button-positive" ng-click="sendEmail()">
+	  Send Email
+	</button>
+	<button class="button button-block button-positive" ng-click="splashScreen()">
+	  Splash Screen
+	</button>
+  </div>
+
+  </ion-content>
+</ion-view>
