@@ -1,0 +1,27 @@
+<ion-view view-title="News">
+    <ion-content class="padding">
+
+        <div class="item item-body">
+            <div>
+                <b>Enter your desired news topic</b>
+                <br>
+                <br>
+                <label class="item item-input">
+
+                    <input type="text" placeholder="query string" ng-model="data.query">
+                </label>
+            </div>
+            <div>
+                <button class="button button-full button-positive" ng-click="getNews(data.query)">
+                    Get news
+                </button>
+            </div>
+            <ion-item ng-repeat="news in news" type="item-text-wrap" class="item-avatar" href="#{{news.url}}">
+                {{news.title}}
+                <p>{{news.url}}</p>
+            </ion-item>
+
+
+        </div>
+    </ion-content>
+</ion-view>

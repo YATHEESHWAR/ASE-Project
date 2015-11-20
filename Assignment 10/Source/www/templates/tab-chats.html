@@ -1,0 +1,35 @@
+<ion-view view-title="Sentiment analysis">
+
+    <ion-content class="padding">
+
+        <div class="item item-body">
+            <div>
+                <b>Enter your text to be analyzed</b>
+                <br>
+                <br>
+                <label class="item item-input">
+
+                    <input type="text" placeholder="text" ng-model="data.text">
+                </label>
+            </div>
+            <div>
+                <button class="button button-full button-positive" ng-click="getSentiment(data.text)">
+                    Analyze
+
+                </button>
+            </div>
+            <div>
+                <label class="item item-input">
+
+                    <input type="text" ng-model="type">
+                </label>
+                <label class="item item-input">
+
+                    <input type="text" ng-model="score">
+                </label>
+
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>
